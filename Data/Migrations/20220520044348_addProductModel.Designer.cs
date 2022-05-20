@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Data;
 
 namespace OnlineShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220520044348_addProductModel")]
+    partial class addProductModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,6 +258,7 @@ namespace OnlineShop.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductColor")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductTypeId")
@@ -273,7 +276,7 @@ namespace OnlineShop.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("OnlineShop.Models.SpecialTag", b =>
+            modelBuilder.Entity("OnlineShop.Models.SpecialtTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,7 +288,7 @@ namespace OnlineShop.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpecialTags");
+                    b.ToTable("SpecialtTags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -347,7 +350,7 @@ namespace OnlineShop.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineShop.Models.SpecialTag", "SpecialTag")
+                    b.HasOne("OnlineShop.Models.SpecialtTag", "SpecialtTag")
                         .WithMany()
                         .HasForeignKey("SpecialTagId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace OnlineShop.Customer.Controllers
 {
@@ -24,9 +25,9 @@ namespace OnlineShop.Customer.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            return View(_context.Products.Include(c => c.ProductTypes).Include(c=>c.SpecialTag).ToList());
+            return View(_context.Products.Include(c => c.ProductTypes).Include(c=>c.SpecialTag).ToList().ToPagedList(page??1,6));
         }
 
         public IActionResult Privacy()
@@ -92,7 +93,7 @@ namespace OnlineShop.Customer.Controllers
                     HttpContext.Session.Set("products", products);
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Cart));
         }
 
 

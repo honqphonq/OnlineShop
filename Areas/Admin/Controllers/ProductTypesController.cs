@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Data;
 using OnlineShop.Models;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(data);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             return View();

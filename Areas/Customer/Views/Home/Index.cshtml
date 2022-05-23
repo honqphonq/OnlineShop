@@ -1,12 +1,13 @@
 ﻿@using OnlineShop.Models;
-@model List<Products>
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Products>
 @{
     ViewData["Title"] = "Home Page";
 }
 <br />
 <br />
 <div class="row">
-    @foreach(var product in Model)
+    @foreach (var product in Model)
     {
         <div class="col-4">
             <div class="card mb-4">
@@ -27,4 +28,7 @@
             </div>
         </div>
     }
+</div>
+<div>
+    @Html.PagedListPager(Model, c=> Href("~/Customer/Home/Index?page="+c), X.PagedList.Web.Common.PagedListRenderOptions.PageNumbersOnly)
 </div>
